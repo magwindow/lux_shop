@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from .models import Product, Category, Gallery
 
@@ -25,12 +26,20 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'category', 'quantity', 'price', 'created_at', 'size', 'color')
+    list_display = ('pk', 'title', 'category', 'quantity', 'price', 'created_at', 'size', 'color', 'get_photo')
     list_editable = ('price', 'quantity', 'size', 'color')
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('title', 'price')
     list_display_links = ('pk', 'title')
     inlines = (GalleryInline,)
+
+    def get_photo(self, obj):
+        if obj.images.all():
+            return mark_safe(f'<img src="{obj.images.all()[0].image.url}" width="75">')
+        else:
+            return '-'
+
+    get_photo.short_description = 'Миниатюра'
 
 
 admin.site.register(Gallery)
