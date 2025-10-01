@@ -20,6 +20,8 @@ class CategoryAdmin(admin.ModelAdmin):
         else:
             return '0'
 
+    get_products_count.short_description = 'Количество товаров'
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
