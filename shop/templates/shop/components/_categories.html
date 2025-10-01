@@ -4,19 +4,13 @@
         <h2 class="h5 text-uppercase mb-4">Коллекции со вкусом</h2>
     </header>
     <div class="row">
-        <div class="col-md-4"><a class="category-item" href="/ru/category/chasy/"><img class="img-fluid"
-                                                                                       src="/media/categories/product-5.jpg"
-                                                                                       alt=""><strong
-                class="category-item-title">Часы</strong></a>
+        {% for category in categories %}
+        <div class="col-md-4">
+            <a class="category-item" href="/ru/category/chasy/">
+            <img class="img-fluid" src="/media/categories/product-5.jpg" alt="">
+                <strong class="category-item-title">{{ category }}</strong>
+            </a>
         </div>
-        <div class="col-md-4"><a class="category-item" href="/ru/category/fotoapparaty/"><img
-                class="img-fluid" src="/media/categories/product-10.jpg" alt=""><strong
-                class="category-item-title">Фотоаппараты</strong></a>
-        </div>
-        <div class="col-md-4"><a class="category-item" href="/ru/category/odezhda/"><img class="img-fluid"
-                                                                                         src="/media/categories/product-6.jpg"
-                                                                                         alt=""><strong
-                class="category-item-title">Одежда</strong></a>
-        </div>
+        {% endfor %}
     </div>
 </section>
