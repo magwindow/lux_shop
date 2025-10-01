@@ -19,6 +19,13 @@ class Category(models.Model):
     def __repr__(self):
         return f'Категория: pk={self.pk}, title={self.title}'
 
+    def get_parent_category_photo(self):
+        """Для получения картинки родительской категории"""
+        if self.image:
+            return self.image.url
+        else:
+            return 'https://www.easytravel.com.tw/Ehotel/images/noimage.jpg'
+
     class Meta:
         verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
