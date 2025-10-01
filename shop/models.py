@@ -20,7 +20,7 @@ class Category(models.Model):
         return f'Категория: pk={self.pk}, title={self.title}'
 
     class Meta:
-        verbose_name = 'Категория'
+        verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
 
 
