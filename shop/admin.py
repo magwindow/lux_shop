@@ -11,8 +11,14 @@ class GalleryInline(admin.TabularInline):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'parent')
+    list_display = ('title', 'parent', 'get_products_count')
     prepopulated_fields = {'slug': ('title',)}
+
+    def get_products_count(self, obj):
+        if obj.products:
+            return str(len(obj.products.all()))
+        else:
+            return '0'
 
 
 @admin.register(Product)
