@@ -3,6 +3,12 @@ from django.contrib import admin
 from .models import Product, Category, Gallery
 
 
+class GalleryInline(admin.TabularInline):
+    fk_name = 'product'
+    model = Gallery
+    extra = 1
+
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'parent')
@@ -16,6 +22,7 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('title', 'price')
     list_display_links = ('pk', 'title')
+    inlines = (GalleryInline,)
 
 
 admin.site.register(Gallery)
