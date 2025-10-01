@@ -1,3 +1,5 @@
+{% load static %}
+
 <html data-bybit-channel-name="PbgNVSnHslH_fQ-ytGBm1" data-bybit-is-default-wallet="true">
 <head>
     <meta charset="utf-8">
@@ -9,25 +11,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <!-- gLightbox gallery-->
-    <link rel="stylesheet" href="/static/shop/vendor/glightbox/css/glightbox.min.css">
+    <link rel="stylesheet" href="{% static 'shop/vendor/glightbox/css/glightbox.min.css' %}">
     <!-- Range slider-->
-    <link rel="stylesheet" href="/static/shop/vendor/nouislider/nouislider.min.css">
+    <link rel="stylesheet" href="{% static 'shop/vendor/nouislider/nouislider.min.css' %}">
     <!-- Choices CSS-->
-    <link rel="stylesheet" href="/static/shop/vendor/choices.js/public/assets/styles/choices.min.css">
+    <link rel="stylesheet" href="{% static 'shop/vendor/choices.js/public/assets/styles/choices.min.css' %}">
     <!-- Swiper slider-->
-    <link rel="stylesheet" href="/static/shop/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{% static 'shop/vendor/swiper/swiper-bundle.min.css' %}">
     <!-- Google fonts-->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="/static/shop/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="{% static 'shop/css/style.default.css' %}" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="/static/shop/css/custom.css">
+    <link rel="stylesheet" href="{% static 'shop/css/custom.css' %}">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="/static/shop/img/favicon.png">
-    <link rel="stylesheet" href="/static/shop/css/additional_style.css">
+    <link rel="shortcut icon" href="{% static 'shop/img/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/additional_style.css' %}">
 </head>
 
 <body>
@@ -464,12 +466,12 @@
     </footer>
 
     <!-- JavaScript files-->
-    <script src="/static/shop/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/shop/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="/static/shop/vendor/nouislider/nouislider.min.js"></script>
-    <script src="/static/shop/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="/static/shop/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
-    <script src="/static/shop/js/front.js"></script>
+    <script src="{% static 'shop/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'shop/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'shop/vendor/nouislider/nouislider.min.js' %}"></script>
+    <script src="{% static 'shop/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'shop/vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+    <script src="{% static 'shop/js/front.js' %}"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
