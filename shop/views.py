@@ -55,3 +55,9 @@ class SubCategories(ListView):
         return context
 
 
+class ProductPage(DetailView):
+    """Вывод товара на отдельной странице"""
+    model = Product
+    context_object_name = 'product'
+    template_name = 'shop/product_page.html'
+
