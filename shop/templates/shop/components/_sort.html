@@ -1,6 +1,7 @@
 {% load shop_tags %}
 
 {% get_subcategories category as categories %}
+{% get_sorted as data %}
 
 <div class="col-lg-3 order-2 order-lg-1">
     <h5 class="text-uppercase mb-4">Фильтры</h5>
@@ -20,63 +21,21 @@
         {% endfor %}
 
 
+        {% for key in data %}
         <div class="py-2 px-4 bg-dark text-white mb-3">
             <strong class="small text-uppercase fw-bold">
-                По цене
+                {{ key.title }}
             </strong>
         </div>
 
+
+        {% for sorter in key.sorters %}
         <li class="mb-2">
-            <a class="reset-anchor" href="?sort=price">
-                По возрастанию цены
+            <a class="reset-anchor" href="?sort={{ sorter.0 }}">
+                {{ sorter.1 }}
             </a>
         </li>
-
-        <li class="mb-2">
-            <a class="reset-anchor" href="?sort=-price">
-                По убыванию цены
-            </a>
-        </li>
-
-
-        <div class="py-2 px-4 bg-dark text-white mb-3">
-            <strong class="small text-uppercase fw-bold">
-                По цвету
-            </strong>
-        </div>
-
-        <li class="mb-2">
-            <a class="reset-anchor" href="?sort=color">
-                От А до Я
-            </a>
-        </li>
-
-        <li class="mb-2">
-            <a class="reset-anchor" href="?sort=-color">
-                От Я до А
-            </a>
-        </li>
-
-
-        <div class="py-2 px-4 bg-dark text-white mb-3">
-            <strong class="small text-uppercase fw-bold">
-                По размеру
-            </strong>
-        </div>
-
-        <li class="mb-2">
-            <a class="reset-anchor" href="?sort=size">
-                По возрастанию размера
-            </a>
-        </li>
-
-        <li class="mb-2">
-            <a class="reset-anchor" href="?sort=-size">
-                По убыванию размера
-            </a>
-        </li>
-
-
+        {% endfor %}
+    {% endfor %}
     </ul>
-
 </div>

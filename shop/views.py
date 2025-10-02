@@ -39,6 +39,11 @@ class SubCategories(ListView):
         parent_category = Category.objects.get(slug=self.kwargs['slug'])
         subcategories = parent_category.subcategories.all()
         products = Product.objects.filter(category__in=subcategories).order_by('?')
+
+        sort_field = self.request.GET.get('sort')
+        if sort_field:
+            products = products.order_by(sort_field)
+
         return products
 
     def get_context_data(self, *, object_list=None, **kwargs):
