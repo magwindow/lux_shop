@@ -48,6 +48,12 @@ class Product(models.Model):
     def get_absolute_url(self):
         pass
 
+    def get_first_photo(self):
+        if self.images.first():
+            return self.images.first().image.url
+        else:
+            return 'https://www.easytravel.com.tw/Ehotel/images/noimage.jpg'
+
     def __str__(self):
         return self.title
 
