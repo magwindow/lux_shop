@@ -16,6 +16,12 @@ class Index(ListView):
         categories = Category.objects.filter(parent=None)
         return categories
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """Вывод на страницу дополнительных элементов"""
+        context = super().get_context_data()
+        context['top_products'] = Product.objects.order_by('-watched')[:3]
+        return context
+
 
 class SubCategories(ListView):
     """Вывод подкатегории на отдельной странице"""
