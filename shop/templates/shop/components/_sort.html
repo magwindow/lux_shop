@@ -13,7 +13,7 @@
 
         {% for category in categories %}
         <li class="mb-2">
-            <a class="reset-anchor" href="?type=smart-chasy">
+            <a class="reset-anchor" href="?type={{ category.slug }}">
                 {{ category }}
             </a>
         </li>
