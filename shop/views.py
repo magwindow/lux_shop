@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
-from .models import Category, Product
+from .models import Category, Product, Review
 from .forms import LoginForm, RegistrationForm, ReviewForm
 
 
@@ -71,6 +71,7 @@ class ProductPage(DetailView):
         products = Product.objects.all().exclude(slug=self.kwargs['slug']).filter(category=product.category)[:5]
         context['title'] = product.title
         context['products'] = products
+        context['reviews'] = Review.objects.filter(product=product).order_by('-pk')
 
         # Показывать форму отзыва, если пользователь прошел авторизацию
         if self.request.user.is_authenticated:
@@ -118,3 +119,15 @@ def user_logout(request):
     """Выход пользователя из личного кабинета"""
     logout(request)
     return redirect('login_registration')
+
+
+def save_review(request, product_pk):
+    """Сохранение отзыва"""
+    form = ReviewForm(data=request.POST)
+    if form.is_valid():
+        review = form.save(commit=False)
+        review.author = request.user
+        product = Product.objects.get(pk=product_pk)
+        review.product = product
+        review.save()
+        return redirect('product_page', product.slug)

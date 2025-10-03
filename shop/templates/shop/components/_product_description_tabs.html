@@ -29,41 +29,43 @@
                             </h6>
                         </div>
                     </div>
+                    {% for review in reviews %}
                     <div class="ms-3 flex-shrink-1">
-                        <h6 class="mb-0 text-uppercase">khasan</h6>
-                        <p class="small text-muted mb-0 text-uppercase">22 июля 2023 г.</p>
+                        <h6 class="mb-0 text-uppercase">{{ review.author.username }}</h6>
+                        <p class="small text-muted mb-0 text-uppercase">{{ review.created_at }}</p>
                         <ul class="list-inline mb-1 text-xs">
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
-                            <li class="list-inline-item m-0"><i
-                                    class="fas fa-star-half-alt text-warning"></i></li>
+                            <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
                         </ul>
-                        <p class="text-sm mb-0 text-muted">qqqqqq</p>
+                        <p class="text-sm mb-0 text-muted">{{ review.text }}</p>
                     </div>
+                    {% endfor %}
                     {% else %}
                     <div class="container">
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="{% url 'save_review' product.pk %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ review_form.as_p }}
                             <button class="btn btn-success">Оставить отзыв</button>
                         </form>
                     </div>
                     <br>
+                    {% for review in reviews %}
                     <div class="ms-3 flex-shrink-1">
-                        <h6 class="mb-0 text-uppercase">khasan</h6>
-                        <p class="small text-muted mb-0 text-uppercase">22 июля 2023 г.</p>
+                        <h6 class="mb-0 text-uppercase">{{ review.author.username }}</h6>
+                        <p class="small text-muted mb-0 text-uppercase">{{ review.created_at }}</p>
                         <ul class="list-inline mb-1 text-xs">
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
                             <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
-                            <li class="list-inline-item m-0"><i
-                                    class="fas fa-star-half-alt text-warning"></i></li>
+                            <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
                         </ul>
-                        <p class="text-sm mb-0 text-muted">qqqqqq</p>
+                        <p class="text-sm mb-0 text-muted">{{ review.text }}</p>
                     </div>
+                    {% endfor %}
                     {% endif %}
                 </div>
             </div>
