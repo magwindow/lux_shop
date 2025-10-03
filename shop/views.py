@@ -104,7 +104,8 @@ def user_registration(request):
         messages.success(request, 'Аккаунт пользователя успешно создан! Пожалуйста войдите в свой аккаунт!')
         return redirect('login_registration')
     else:
-        messages.error(request, 'Что-то пошло не так')
+        for error in form.errors:
+            messages.error(request, form.errors[error].as_text())
         return redirect('login_registration')
 
 
