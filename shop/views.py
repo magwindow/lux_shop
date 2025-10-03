@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
 from .models import Category, Product
+from .forms import LoginForm, RegistrationForm
 
 
 class Index(ListView):
@@ -69,4 +70,13 @@ class ProductPage(DetailView):
         context['title'] = product.title
         context['products'] = products
         return context
+
+
+def login_registration(request):
+    context = {
+        'title': 'Войти/Зарегистрироваться',
+        'login_form': LoginForm,
+        'registration_form': RegistrationForm
+    }
+    return render(request, 'shop/login_registration.html', context)
 
