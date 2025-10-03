@@ -1,0 +1,92 @@
+[
+  {
+    "model": "shop.category",
+    "pk": 1,
+    "fields": {
+      "title": "Часы",
+      "image": "categories/product-5.jpg",
+      "slug": "chasy",
+      "parent": null
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 2,
+    "fields": {
+      "title": "Механические",
+      "image": "",
+      "slug": "mehanicheskie",
+      "parent": 1
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 3,
+    "fields": {
+      "title": "Умные",
+      "image": "",
+      "slug": "umnye",
+      "parent": 1
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 4,
+    "fields": {
+      "title": "Фотоаппараты",
+      "image": "categories/product-10.jpg",
+      "slug": "fotoapparaty",
+      "parent": null
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 5,
+    "fields": {
+      "title": "Одежда",
+      "image": "categories/product-6.jpg",
+      "slug": "odezhda",
+      "parent": null
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 6,
+    "fields": {
+      "title": "Canon",
+      "image": "",
+      "slug": "canon",
+      "parent": 4
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 7,
+    "fields": {
+      "title": "Nikon",
+      "image": "",
+      "slug": "nikon",
+      "parent": 4
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 8,
+    "fields": {
+      "title": "Мужская",
+      "image": "",
+      "slug": "muzhskaya",
+      "parent": 5
+    }
+  },
+  {
+    "model": "shop.category",
+    "pk": 9,
+    "fields": {
+      "title": "Женская",
+      "image": "",
+      "slug": "zhenskaya",
+      "parent": 5
+    }
+  }
+]
