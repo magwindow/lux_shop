@@ -101,7 +101,8 @@ def user_registration(request):
     form = RegistrationForm(data=request.POST)
     if form.is_valid():
         form.save()
-        messages.success(request, 'Аккаунт пользователя успешно создан!')
+        messages.success(request, 'Аккаунт пользователя успешно создан! Пожалуйста войдите в свой аккаунт!')
+        return redirect('login_registration')
     else:
         messages.error(request, 'Что-то пошло не так')
         return redirect('login_registration')
