@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 
 from .models import Category, Product
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, ReviewForm
 
 
 class Index(ListView):
@@ -71,6 +71,11 @@ class ProductPage(DetailView):
         products = Product.objects.all().exclude(slug=self.kwargs['slug']).filter(category=product.category)[:5]
         context['title'] = product.title
         context['products'] = products
+
+        # Показывать форму отзыва, если пользователь прошел авторизацию
+        if self.request.user.is_authenticated:
+            context['review_form'] = ReviewForm
+
         return context
 
 

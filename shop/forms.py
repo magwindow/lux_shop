@@ -26,3 +26,12 @@ class RegistrationForm(UserCreationForm):
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'})
         }
+
+
+class ReviewForm(forms.ModelForm):
+    """Форма для отзыва"""
+
+    class Meta:
+        model = Review
+        fields = ('text',)
+        widgets = {'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ваш отзыв...'})}

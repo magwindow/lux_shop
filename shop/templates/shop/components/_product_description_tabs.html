@@ -18,20 +18,17 @@
         <div class="p-4 p-lg-5 bg-white">
             <div class="row">
                 <div class="col-lg-8">
+                    {% if not request.user.is_authenticated %}
                     <div class="d-flex mb-3">
                         <div class="flex-shrink-0"><img class="rounded-circle" src="img/customer-1.png"
                                                         alt="" width="50"></div>
-
-
                         <div class="container">
                             <h6 class="text-center">
                                 Отзыв могут оставить только зарегистрированные пользователи
-                                <a href="/ru/login_registration/">Войти</a>
+                                <a href="{% url 'login_registration' %}">Войти</a>
                             </h6>
                         </div>
-
                     </div>
-
                     <div class="ms-3 flex-shrink-1">
                         <h6 class="mb-0 text-uppercase">khasan</h6>
                         <p class="small text-muted mb-0 text-uppercase">22 июля 2023 г.</p>
@@ -45,7 +42,29 @@
                         </ul>
                         <p class="text-sm mb-0 text-muted">qqqqqq</p>
                     </div>
-
+                    {% else %}
+                    <div class="container">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ review_form.as_p }}
+                            <button class="btn btn-success">Оставить отзыв</button>
+                        </form>
+                    </div>
+                    <br>
+                    <div class="ms-3 flex-shrink-1">
+                        <h6 class="mb-0 text-uppercase">khasan</h6>
+                        <p class="small text-muted mb-0 text-uppercase">22 июля 2023 г.</p>
+                        <ul class="list-inline mb-1 text-xs">
+                            <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                            <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                            <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                            <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                            <li class="list-inline-item m-0"><i
+                                    class="fas fa-star-half-alt text-warning"></i></li>
+                        </ul>
+                        <p class="text-sm mb-0 text-muted">qqqqqq</p>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
