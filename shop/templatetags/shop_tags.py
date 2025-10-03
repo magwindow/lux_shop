@@ -43,5 +43,11 @@ def get_sorted():
 
 @range_register.filter
 def get_positive_range(value):
-    """Для отображения кол-во звезд"""
+    """Отображение кол-во закрашенных звезд"""
     return range(int(value))
+
+
+@range_register.filter
+def get_negative_range(value):
+    """Отображение кол-во пустых звезд"""
+    return range(5 - int(value))
