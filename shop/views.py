@@ -61,3 +61,12 @@ class ProductPage(DetailView):
     context_object_name = 'product'
     template_name = 'shop/product_page.html'
 
+    def get_context_data(self, **kwargs):
+        """Вывод на страницу дополнительных элементов"""
+        context = super().get_context_data()
+        product = Product.objects.get(slug=self.kwargs['slug'])
+        products = Product.objects.all().exclude(slug=self.kwargs['slug']).filter(category=product.category)[:5]
+        context['title'] = product.title
+        context['products'] = products
+        return context
+
