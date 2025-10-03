@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
+    """Категории товаров"""
     title = models.CharField(max_length=150, verbose_name='Наименование категории')
     image = models.ImageField(upload_to='categories/', null=True, blank=True, verbose_name='Изображение')
     slug = models.SlugField(unique=True, null=True)
@@ -33,6 +34,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    """Описание товаров"""
     title = models.CharField(max_length=255, verbose_name='Наименование товара')
     price = models.FloatField(verbose_name='Цена')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
@@ -46,9 +48,11 @@ class Product(models.Model):
     color = models.CharField(max_length=30, default='Серебро', verbose_name='Цвет/Материал')
 
     def get_absolute_url(self):
+        """Ссылка на страницу товара"""
         return reverse('product_page', kwargs={'slug': self.slug})
 
     def get_first_photo(self):
+        """Для получения картинки"""
         if self.images.first():
             return self.images.first().image.url
         else:
@@ -66,6 +70,7 @@ class Product(models.Model):
 
 
 class Gallery(models.Model):
+    """Галерея изображений товара"""
     image = models.ImageField(upload_to='products/', verbose_name='Изображение')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
 

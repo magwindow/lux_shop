@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
+from django.contrib.auth import login, logout
+from django.contrib import messages
 
 from .models import Category, Product
 from .forms import LoginForm, RegistrationForm
@@ -73,6 +75,7 @@ class ProductPage(DetailView):
 
 
 def login_registration(request):
+    """Страница Входа/Регистрации"""
     context = {
         'title': 'Войти/Зарегистрироваться',
         'login_form': LoginForm,
@@ -80,3 +83,31 @@ def login_registration(request):
     }
     return render(request, 'shop/login_registration.html', context)
 
+
+def user_login(request):
+    """Авторизация пользователя"""
+    form = LoginForm(data=request.POST)
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        return redirect('index')
+    else:
+        messages.error(request, 'Неверное имя пользователя или пароль')
+        return redirect('login_registration')
+
+
+def user_registration(request):
+    """Регистрация пользователя"""
+    form = RegistrationForm(data=request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Аккаунт пользователя успешно создан!')
+    else:
+        messages.error(request, 'Что-то пошло не так')
+        return redirect('login_registration')
+
+
+def user_logout(request):
+    """Выход пользователя из личного кабинета"""
+    logout(request)
+    return redirect('login_registration')
