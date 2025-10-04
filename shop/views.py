@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
-from .models import Category, Product, Review, FavoriteProducts
+from .models import Category, Product, Review, FavoriteProducts, Mail
 from .forms import LoginForm, RegistrationForm, ReviewForm
 
 
@@ -163,3 +163,15 @@ def save_favorite_product(request, product_slug):
 
         next_page = request.META.get('HTTP_REFERER', 'category_detail')
         return redirect(next_page)
+
+
+def save_subscribers(request):
+    """Собиратель почтовых адресов"""
+    email = request.POST.get('email')
+    user = request.user if request.user.is_authenticated else None
+    if email:
+        try:
+            Mail.objects.create(mail=email, user=user)
+        except:
+            pass
+    return redirect('index')
