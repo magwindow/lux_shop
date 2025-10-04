@@ -42,7 +42,6 @@ class ReviewForm(forms.ModelForm):
 
 class CustomerForm(forms.ModelForm):
     """Контактная информация"""
-
     class Meta:
         model = Customer
         fields = ('first_name', 'last_name', 'email', 'phone')

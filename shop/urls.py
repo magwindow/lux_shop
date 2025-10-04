@@ -17,4 +17,5 @@ urlpatterns = [
     path('save_email/', save_subscribers, name='save_subscribers'),
     path('cart/', cart, name='cart'),
     path('to_cart/<int:product_id>/<str:action>/', to_cart, name='to_cart'),
+    path('checkout/', checkout, name='checkout'),
 ]

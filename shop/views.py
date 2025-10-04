@@ -186,7 +186,8 @@ def cart(request):
     context = {
         'order': cart_info['order'],
         'order_products': cart_info['order_products'],
-        'cart_total_quantity': cart_info['cart_total_quantity']
+        'cart_total_quantity': cart_info['cart_total_quantity'],
+        'title': 'Корзина'
     }
     return render(request, 'shop/cart.html', context)
 
@@ -199,3 +200,17 @@ def to_cart(request, product_id, action):
     else:
         messages.error(request, 'Авторизуйтесь или зарегистрируйтесь, чтобы совершать покупки')
         return redirect('login_registration')
+
+
+def checkout(request):
+    """Страница оформления заказа"""
+    cart_info = get_cart_data(request)
+    context = {
+        'order': cart_info['order'],
+        'order_products': cart_info['order_products'],
+        'cart_total_quantity': cart_info['cart_total_quantity'],
+        'customer_form': CustomerForm(),
+        'shipping_form': ShippingForm(),
+        'title': 'Оформление заказа'
+    }
+    return render(request, 'shop/checkout.html', context)
