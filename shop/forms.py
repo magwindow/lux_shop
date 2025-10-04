@@ -38,3 +38,29 @@ class ReviewForm(forms.ModelForm):
             'text': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ваш отзыв...'}),
             'grade': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Ваша оценка'})
         }
+
+
+class CustomerForm(forms.ModelForm):
+    """Контактная информация"""
+
+    class Meta:
+        model = Customer
+        fields = ('first_name', 'last_name', 'email', 'phone')
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Bruce'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Wayne'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'batman@gmail.com'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+79521479654'})
+        }
+
+
+class ShippingForm(forms.ModelForm):
+    """Адрес доставки"""
+    class Meta:
+        model = ShippingAddress
+        fields = ('city', 'state', 'street')
+        widgets = {
+            'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Las Vegas'}),
+            'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nevada'}),
+            'street': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'West Warm Springs'}),
+        }

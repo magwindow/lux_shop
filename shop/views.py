@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.db.utils import IntegrityError
 
 from .models import Category, Product, Review, FavoriteProducts, Mail
-from .forms import LoginForm, RegistrationForm, ReviewForm
+from .forms import LoginForm, RegistrationForm, ReviewForm, ShippingForm, CustomerForm
 
 
 class Index(ListView):
@@ -177,3 +177,13 @@ def save_subscribers(request):
         except IntegrityError:
             messages.error(request, 'Вы уже являетесь подписчиком')
     return redirect('index')
+
+
+def cart(request):
+    """Страница корзины"""
+    return render(request, 'shop/cart.html')
+
+
+def to_cart(request, product_id, action):
+    """Добавляет товар в корзину"""
+    return redirect('cart')
