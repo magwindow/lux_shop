@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
 from .models import Category, Product, Review, FavoriteProducts
@@ -78,6 +79,21 @@ class ProductPage(DetailView):
             context['review_form'] = ReviewForm
 
         return context
+
+
+class FavoriteProductsView(LoginRequiredMixin, ListView):
+    """Для вывода избранных на страницу"""
+    model = FavoriteProducts
+    context_object_name = 'products'
+    template_name = 'shop/favorite_products.html'
+    login_url = 'user_registration'
+
+    def get_queryset(self):
+        """Получаем товары конкретного пользователя"""
+        user = self.request.user
+        favs = FavoriteProducts.objects.filter(user=user)
+        products = [i.product for i in favs]
+        return products
 
 
 def login_registration(request):
