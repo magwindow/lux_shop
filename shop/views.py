@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
-from .models import Category, Product, Review
+from .models import Category, Product, Review, FavoriteProducts
 from .forms import LoginForm, RegistrationForm, ReviewForm
 
 
@@ -131,3 +131,19 @@ def save_review(request, product_pk):
         review.product = product
         review.save()
         return redirect('product_page', product.slug)
+
+
+def save_favorite_product(request, product_slug):
+    """Добавление/удаление товара с избранных"""
+    user = request.user if request.user.is_authenticated else None
+    product = Product.objects.get(slug=product_slug)
+    favorite_products = FavoriteProducts.objects.filter(user=user)
+    if user:
+        if product in [i.product for i in favorite_products]:
+            fav_product = FavoriteProducts.objects.get(user=user, product=product)
+            fav_product.delete()
+        else:
+            FavoriteProducts.objects.create(user=user, product=product)
+
+        next_page = request.META.get('HTTP_REFERER', 'category_detail')
+        return redirect(next_page)
