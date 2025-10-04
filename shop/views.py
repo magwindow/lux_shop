@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.db.utils import IntegrityError
 
 from .models import Category, Product, Review, FavoriteProducts, Mail
 from .forms import LoginForm, RegistrationForm, ReviewForm
@@ -172,6 +173,7 @@ def save_subscribers(request):
     if email:
         try:
             Mail.objects.create(mail=email, user=user)
-        except:
-            pass
+            messages.success(request, 'Ваш почтовый адрес успешно зарегистрирован')
+        except IntegrityError:
+            messages.error(request, 'Вы уже являетесь подписчиком')
     return redirect('index')

@@ -7,16 +7,7 @@
 
 {% block main %}
 <main>
-    {% if messages %}
-    <div class="container">
-        {% for message in messages %}
-        <div class="alert alert-{% if message.tags == 'error' %}danger alert-dismissible fade show{% else %}{{ message.tags }}{% endif %}">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
+    {% include 'shop/components/_user_messages.html' %}
     <div><div style="margin-top: 150px;"></div></div>
     <div class="container d-flex justify-content-around">
         <div class="login">
