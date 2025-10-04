@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Product, Category, Gallery, Review, Mail
+from .models import *
 
 
 class GalleryInline(admin.TabularInline):
@@ -57,6 +57,34 @@ class ReviewAdmin(admin.ModelAdmin):
 class MailAdmin(admin.ModelAdmin):
     """Почтовые подписки"""
     list_display = ('pk', 'mail', 'user')
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    """Корзина"""
+    list_display = ('customer', 'created_at', 'is_completed', 'shipping')
+    list_filter = ('customer', 'is_completed')
+
+
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    """Заказчики"""
+    list_display = ('user', 'first_name', 'last_name', 'email')
+    list_filter = ('user',)
+
+
+@admin.register(OrderProduct)
+class OrderProductAdmin(admin.ModelAdmin):
+    """Товары в заказах"""
+    list_display = ('product', 'order', 'quantity', 'added_at')
+    list_filter = ('product',)
+
+
+@admin.register(ShippingAddress)
+class ShippingAddressAdmin(admin.ModelAdmin):
+    """Адреса доставки"""
+    list_display = ('customer', 'city', 'state')
+    list_filter = ('customer',)
 
 
 admin.site.register(Gallery)
