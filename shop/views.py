@@ -7,6 +7,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.db.utils import IntegrityError
+from django.core import paginator
 
 from .models import Category, Product, Review, FavoriteProducts, Mail, Customer
 from .forms import LoginForm, RegistrationForm, ReviewForm, ShippingForm, CustomerForm
@@ -35,6 +36,7 @@ class Index(ListView):
 
 class SubCategories(ListView):
     """Вывод подкатегории на отдельной странице"""
+    paginate_by = 2
     model = Product
     context_object_name = 'products'
     template_name = 'shop/category_page.html'
@@ -48,7 +50,7 @@ class SubCategories(ListView):
 
         parent_category = Category.objects.get(slug=self.kwargs['slug'])
         subcategories = parent_category.subcategories.all()
-        products = Product.objects.filter(category__in=subcategories).order_by('?')
+        products = Product.objects.filter(category__in=subcategories)
 
         sort_field = self.request.GET.get('sort')
         if sort_field:
