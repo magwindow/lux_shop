@@ -55,7 +55,7 @@
                     <!-- BILLING ADDRESS-->
                     <div class="col-lg-6">
                         <div class="box-element">
-                            <form action="/ru/payment/" method="post" enctype="multipart/form-data">
+                            <form action="{% url 'payment' %}" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div id="user-info">
                                     <h2 class="h5 text-uppercase mb-4">Ваши данные</h2>

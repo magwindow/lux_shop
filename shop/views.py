@@ -1,3 +1,6 @@
+import stripe
+
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
@@ -5,9 +8,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.db.utils import IntegrityError
 
-from .models import Category, Product, Review, FavoriteProducts, Mail
+from .models import Category, Product, Review, FavoriteProducts, Mail, Customer
 from .forms import LoginForm, RegistrationForm, ReviewForm, ShippingForm, CustomerForm
 from .utils import CartForAuthenticatedUser, get_cart_data
+from app import settings
 
 
 class Index(ListView):
@@ -214,3 +218,48 @@ def checkout(request):
         'title': 'Оформление заказа'
     }
     return render(request, 'shop/checkout.html', context)
+
+
+def create_checkout_session(request):
+    """Оплата на Stripe"""
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    if request.method == 'POST':
+        user_cart = CartForAuthenticatedUser(request)
+        cart_info = user_cart.get_cart_info()
+        customer_form = CustomerForm(data=request.POST)
+        if customer_form.is_valid():
+            customer = Customer.objects.get(user=request.user)
+            customer.first_name = customer_form.cleaned_data['first_name']
+            customer.last_name = customer_form.cleaned_data['last_name']
+            customer.email = customer_form.cleaned_data['email']
+            customer.phone = customer_form.cleaned_data['phone']
+            customer.save()
+        shipping_form = ShippingForm(data=request.POST)
+        if shipping_form.is_valid():
+            address = shipping_form.save(commit=False)
+            address.customer = Customer.objects.get(user=request.user)
+            address.order = user_cart.get_cart_info()['order']
+            address.save()
+
+        total_price = cart_info['cart_total_price']
+        total_quantity = cart_info['cart_total_quantity']
+
+        session = stripe.checkout.Session.create(
+            line_items=[{
+                'price_data': {'currency': 'usd',
+                               'product_data': {'name': 'Товары с shop lux'},
+                               'unit_amount': int(total_price * 100)},
+                'quantity': total_quantity}],
+            mode='payment',
+            success_url=request.build_absolute_uri(reverse('success')),
+            cancel_url=request.build_absolute_uri(reverse('success'))
+        )
+        return redirect(session.url, 303)
+
+
+def successPayment(request):
+    """Оплата прошла успешно"""
+    user_cart = CartForAuthenticatedUser(request)
+    user_cart.clear()
+    messages.success(request, 'Оплата прошла успешно')
+    return render(request, 'shop/success.html')

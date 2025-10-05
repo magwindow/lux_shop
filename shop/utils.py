@@ -3,6 +3,7 @@ from .models import Product, OrderProduct, Order, Customer
 
 class CartForAuthenticatedUser:
     """Логика корзины"""
+
     def __init__(self, request, product_id=None, action=None):
         self.user = request.user
         if product_id and action:
@@ -44,6 +45,14 @@ class CartForAuthenticatedUser:
 
         if order_product.quantity < 1:
             order_product.delete()
+
+    def clear(self):
+        """Удаление всех товаров с корзины"""
+        order = self.get_cart_info()['order']
+        order_products = order.ordered.all()
+        for product in order_products:
+            product.delete()
+        order.save()
 
 
 def get_cart_data(request):
