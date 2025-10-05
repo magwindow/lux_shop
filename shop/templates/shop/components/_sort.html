@@ -1,14 +1,16 @@
 {% load shop_tags %}
 
+{% load i18n %}
+
 {% get_subcategories category as categories %}
 {% get_sorted as data %}
 
 <div class="col-lg-3 order-2 order-lg-1">
-    <h5 class="text-uppercase mb-4">Фильтры</h5>
+    <h5 class="text-uppercase mb-4">{% translate 'Фильтры' %}</h5>
     <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
         <div class="py-2 px-4 bg-dark text-white mb-3">
             <strong class="small text-uppercase fw-bold">
-                подкатегории {{ category }}
+                {% translate 'подкатегории' %} {{ category }}
             </strong>
         </div>
 

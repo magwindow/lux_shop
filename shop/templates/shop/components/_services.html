@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row text-center gy-3">
@@ -8,8 +10,8 @@
                             <use xlink:href="#delivery-time-1"></use>
                         </svg>
                         <div class="text-start ms-3">
-                            <h6 class="text-uppercase mb-1">Доставка</h6>
-                            <p class="text-sm mb-0 text-muted">Доставка бесплатная по Ташкенту</p>
+                            <h6 class="text-uppercase mb-1">{% translate 'Доставка' %}</h6>
+                            <p class="text-sm mb-0 text-muted">{% translate 'Доставка бесплатная по Лас-Вегас' %}</p>
                         </div>
                     </div>
                 </div>
@@ -21,8 +23,8 @@
                             <use xlink:href="#helpline-24h-1"></use>
                         </svg>
                         <div class="text-start ms-3">
-                            <h6 class="text-uppercase mb-1">На связи 24 x 7</h6>
-                            <p class="text-sm mb-0 text-muted">Только в телеграмме</p>
+                            <h6 class="text-uppercase mb-1">{% translate 'На связи' %} 24 x 7</h6>
+                            <p class="text-sm mb-0 text-muted">{% translate 'Только в телеграмме' %}</p>
                         </div>
                     </div>
                 </div>
@@ -34,8 +36,8 @@
                             <use xlink:href="#label-tag-1"></use>
                         </svg>
                         <div class="text-start ms-3">
-                            <h6 class="text-uppercase mb-1">Уведомления</h6>
-                            <p class="text-sm mb-0 text-muted">Будь в курсе всего</p>
+                            <h6 class="text-uppercase mb-1">{% translate 'Уведомления' %}</h6>
+                            <p class="text-sm mb-0 text-muted">{% translate 'Будь в курсе всего' %}</p>
                         </div>
                     </div>
                 </div>

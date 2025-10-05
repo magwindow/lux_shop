@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from modeltranslation.admin import TranslationAdmin
+
 from .models import *
 
 
@@ -12,9 +14,9 @@ class GalleryInline(admin.TabularInline):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     """Отображение категории товаров"""
-    list_display = ('title', 'parent', 'get_products_count')
+    list_display = ('pk', 'title', 'parent', 'get_products_count')
     prepopulated_fields = {'slug': ('title',)}
 
     def get_products_count(self, obj):
@@ -28,7 +30,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     """Отображение товаров"""
     list_display = ('pk', 'title', 'category', 'quantity', 'price', 'created_at', 'size', 'color', 'get_photo')
     list_editable = ('price', 'quantity', 'size', 'color')

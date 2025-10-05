@@ -1,6 +1,8 @@
 {% load static %}
 {% load shop_tags %}
 
+{% load i18n %}
+
 <div class="product text-center">
     <div class="mb-3 position-relative">
         <div class="badge text-white bg-"></div>
@@ -19,11 +21,11 @@
                 <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="{% url 'add_favorite' product.slug %}"><i class="far fa-heart"></i></a></li>
                 {% endif %}
 
-                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{% url 'to_cart' product.pk 'add' %}">Добавить в корзину</a></li>
+                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{% url 'to_cart' product.pk 'add' %}">{% translate 'Добавить в корзину' %}</a></li>
                 <!--                    <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="#productView" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>-->
             </ul>
         </div>
     </div>
-    <h6><a class="reset-anchor" href="detail.html">{{ product }}</a></h6>
+    <h6><a class="reset-anchor" href="{{ product.get_absolute_url }}">{{ product }}</a></h6>
     <p class="small text-muted">${{ product.price }}</p>
 </div>

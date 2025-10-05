@@ -1,17 +1,19 @@
+{% load i18n %}
+
 <section class="py-5">
     <div class="container p-0">
         <div class="row gy-3">
             <div class="col-lg-6">
-                <h5 class="text-uppercase">Подписка</h5>
-                <p class="text-sm text-muted mb-0">Подпишись, и всегда будь в курсе акций или событий</p>
+                <h5 class="text-uppercase">{% translate 'Подписка' %}</h5>
+                <p class="text-sm text-muted mb-0">{% translate 'Подпишись, и всегда будь в курсе акций или событий' %}</p>
             </div>
             <div class="col-lg-6">
                 <form action="{% url 'save_subscribers' %}" method="post">
                     {% csrf_token %}
                     <div class="input-group">
                         <input name="email" class="form-control form-control-lg" type="email"
-                               placeholder="Введите ваш почтовый адрес" aria-describedby="button-addon2">
-                        <button class="btn btn-dark" type="submit">Подписаться</button>
+                               placeholder="{% translate 'Введите ваш почтовый адрес' %}" aria-describedby="button-addon2">
+                        <button class="btn btn-dark" type="submit">{% translate 'Подписаться' %}</button>
                     </div>
                 </form>
             </div>

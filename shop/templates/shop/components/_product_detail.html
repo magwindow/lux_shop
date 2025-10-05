@@ -1,6 +1,8 @@
 {% load static %}
 {% load shop_tags %}
 
+{% load i18n %}
+
 <div class="col-lg-6">
     <ul class="list-inline mb-2 text-sm">
         <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
@@ -15,7 +17,7 @@
     <div class="row align-items-stretch mb-4">
         <div class="col-sm-3 pl-sm-0"><a
                 class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
-                href="{% url 'to_cart' product.pk 'add' %}">Добавить в корзину</a></div>
+                href="{% url 'to_cart' product.pk 'add' %}">{% translate 'Добавить в корзину' %}</a></div>
     </div>
 
     {% if request.user.is_authenticated %}
@@ -24,24 +26,24 @@
 
     {% if product in fav_products and request.user.is_authenticated %}
     <a class="text-dark p-0 mb-4 d-inline-block" href="{% url 'add_favorite' product.slug %}">
-        <i class="fas far fa-heart me-2" style="color:black"></i>Удалить из избранного</a><br>
+        <i class="fas far fa-heart me-2" style="color:black"></i>{% translate 'Удалить из избранного' %}</a><br>
     {% else %}
     <a class="text-dark p-0 mb-4 d-inline-block" href="{% url 'add_favorite' product.slug %}">
-        <i class="far fa-heart me-2"></i>Добавить в избранное</a><br>
+        <i class="far fa-heart me-2"></i>{% translate 'Добавить в избранное' %}</a><br>
     {% endif %}
 
     <ul class="list-unstyled small d-inline-block">
-        <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">В наличии:</strong><span
+        <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">{% translate 'В наличии' %}:</strong><span
                 class="ms-2 text-muted">{{ product.quantity }} шт.</span>
         </li>
-        <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Категория:</strong><a
+        <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">{% translate 'Категория' %}:</strong><a
                 class="reset-anchor ms-2" href="#!">{{ product.category }}</a>
         </li>
         <li class="px-3 py-2 mb-1 bg-white text-muted"><strong
-                class="text-uppercase text-dark">Размер:</strong><a class="reset-anchor ms-2" href="#!">{{ product.size }}</a>
+                class="text-uppercase text-dark">{% translate 'Размер' %}:</strong><a class="reset-anchor ms-2" href="#!">{{ product.size }}</a>
         </li>
         <li class="px-3 py-2 mb-1 bg-white text-muted"><strong
-                class="text-uppercase text-dark">Цвет/Материал:</strong><a class="reset-anchor ms-2" href="#!">{{ product.color }}</a>
+                class="text-uppercase text-dark">{% translate 'Цвет/Материал' %}:</strong><a class="reset-anchor ms-2" href="#!">{{ product.color }}</a>
         </li>
     </ul>
 </div>

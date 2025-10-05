@@ -1,5 +1,6 @@
 from django import template
 from django.template.defaulttags import register as range_register
+from django.utils.translation import gettext_lazy as _
 
 from shop.models import Category, FavoriteProducts
 
@@ -17,24 +18,24 @@ def get_sorted():
     """Сортировка товаров по цене, цвету, размеру"""
     sorters = [
         {
-            'title': 'Цена',
+            'title': _('Цена'),
             'sorters': [
-                ('price', 'По возрастанию'),
-                ('-price', 'По убыванию')
+                ('price', _('По возрастанию')),
+                ('-price', _('По убыванию'))
             ]
         },
         {
-            'title': 'Цвет',
+            'title': _('Цвет'),
             'sorters': [
-                ('color', 'от А до Я'),
-                ('-color', 'от Я до А')
+                ('color', _('от А до Я')),
+                ('-color', _('от Я до А'))
             ]
         },
         {
-            'title': 'Размер',
+            'title': _('Размер'),
             'sorters': [
-                ('size', 'По возрастанию'),
-                ('-size', 'По убыванию')
+                ('size', _('По возрастанию')),
+                ('-size', _('По убыванию'))
             ]
         }
     ]

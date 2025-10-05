@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block title %}
 {{ title }}
 {% endblock title %}
@@ -10,9 +12,9 @@
     <div><div style="margin-top: 150px;"></div></div>
     <div class="container">
         <div class="content">
-            <h2>Оплата прошла успешно! Спасибо за покупку!</h2>
-            <p>Вы можете продолжить покупки</p>
-            <a href="{% url 'index' %}" class="btn btn-success">Вернуться на главную</a>
+            <h2>{% translate 'Оплата прошла успешно! Спасибо за покупку!' %}</h2>
+            <p>{% translate 'Вы можете продолжить покупки' %}</p>
+            <a href="{% url 'index' %}" class="btn btn-success">{% translate 'Вернуться на главную' %}</a>
         </div>
     </div>
     <div><div style="margin-top: 350px;"></div></div>

@@ -1,7 +1,9 @@
+{% load i18n %}
+
 <section class="pt-5">
     <header class="text-center">
-        <p class="small text-muted small text-uppercase mb-1">Подборки товаров</p>
-        <h2 class="h5 text-uppercase mb-4">Коллекции со вкусом</h2>
+        <p class="small text-muted small text-uppercase mb-1">{% translate 'Подборки товаров' %}</p>
+        <h2 class="h5 text-uppercase mb-4">{% translate 'Коллекции со вкусом' %}</h2>
     </header>
     <div class="row">
         {% for category in categories %}

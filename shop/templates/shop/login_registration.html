@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+
 {% block title %}
 {{ title }}
 {% endblock title %}
@@ -11,23 +13,23 @@
     <div><div style="margin-top: 150px;"></div></div>
     <div class="container d-flex justify-content-around">
         <div class="login">
-            <h2 class="form-title">Войти в аккаунт</h2>
+            <h2 class="form-title">{% translate 'Войти в аккаунт' %}</h2>
             <form action="{% url 'user_login' %}" class="login-form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">{{ login_form.username }}</div>
                 <div class="form-group">{{ login_form.password }}</div>
-                <button class="btn btn-primary" type="submit">Войти</button>
+                <button class="btn btn-primary" type="submit">{% translate 'Войти' %}</button>
             </form>
         </div>
         <div class="registration">
-            <h2 class="form-title">Создать аккаунт</h2>
+            <h2 class="form-title">{% translate 'Создать аккаунт' %}</h2>
             <form action="{% url 'user_registration' %}" class="registration-form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">{{ registration_form.username }}</div>
                 <div class="form-group">{{ registration_form.email }}</div>
                 <div class="form-group">{{ registration_form.password1 }}</div>
                 <div class="form-group">{{ registration_form.password2 }}</div>
-                <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+                <button class="btn btn-primary" type="submit">{% translate 'Зарегистрироваться' %}</button>
             </form>
         </div>
     </div>
