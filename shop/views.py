@@ -7,7 +7,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.db.utils import IntegrityError
-from django.core import paginator
+from django.core.mail import send_mail
 
 from .models import Category, Product, Review, FavoriteProducts, Mail, Customer
 from .forms import LoginForm, RegistrationForm, ReviewForm, ShippingForm, CustomerForm
@@ -265,3 +265,23 @@ def successPayment(request):
     user_cart.clear()
     messages.success(request, 'Оплата прошла успешно')
     return render(request, 'shop/success.html')
+
+
+def send_mail_to_subscribers(request):
+    """Отправка писем подписчикам"""
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        mail_list = Mail.objects.all()
+        for email in mail_list:
+            send_mail(
+                subject='У нас новая акция',
+                message=text,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email.mail],
+                fail_silently=False
+            )
+            print(f'Сообщение отправлено на почту: {email} ------ {bool(send_mail)}')
+
+    context = {'title': 'Спаммер'}
+    return render(request, 'shop/send_email.html', context)
+

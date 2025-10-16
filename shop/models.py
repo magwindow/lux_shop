@@ -126,6 +126,9 @@ class Mail(models.Model):
         verbose_name = 'Почту'
         verbose_name_plural = 'Почты'
 
+    def __str__(self):
+        return self.mail
+
 
 class Customer(models.Model):
     """Контактная информация заказчика"""

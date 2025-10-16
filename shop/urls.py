@@ -20,4 +20,5 @@ urlpatterns = [
     path('checkout/', checkout, name='checkout'),
     path('payment/', create_checkout_session, name='payment'),
     path('payment_success/', successPayment, name='success'),
+    path('send_email/', send_mail_to_subscribers, name='send_email')
 ]
